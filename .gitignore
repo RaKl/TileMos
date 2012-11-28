@@ -1,0 +1,10 @@
+#Folders
+tiles/**
+tiles_test/**
+SRTM-Daten/**
+data/**
+
+#Cached files
+*.*~
+*.~
+

@@ -1,0 +1,43 @@
+<Map background-color="rgb(255,255,255)" srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +wktext  +no_defs">
+<Style name="border">
+        <Rule name="rule 1">
+            <LineSymbolizer stroke="rgb(0,0,0)" stroke-width="2.0" stroke-opacity="0.7"/>
+        </Rule>
+    </Style>
+  <Style name="hillshade style">
+        <Rule name="rule 1">
+            <RasterSymbolizer opacity="0.7" scaling="bilinear" mode="multiply" />
+        </Rule>
+    </Style>
+    <Style name="color_relief">
+        <Rule name="rule 1">
+            <RasterSymbolizer opacity="1" scaling="bilinear" mode="multiply" />
+        </Rule>
+    </Style>
+ 
+<Layer name="border" srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +wktext  +no_defs">
+        <StyleName>border</StyleName>
+        <Datasource>
+            <Parameter name="file">../Shapes/grenze-polygon.shp</Parameter>
+            <Parameter name="type">shape</Parameter>
+        </Datasource>
+    </Layer>
+ <Layer name="hillshade" srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +wktext  +no_defs">
+        <StyleName>hillshade style</StyleName>
+        <Datasource>
+            <Parameter name="type">gdal</Parameter>
+            <Parameter name="file">../saxony_shade_goog-cut.tif</Parameter>
+        </Datasource>
+    </Layer>
+
+<Layer name="color_relief" srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +wktext  +no_defs">
+        <StyleName>color_relief</StyleName>
+        <Datasource>
+            <Parameter name="type">gdal</Parameter>
+            <Parameter name="file">../saxony_color_relief_goog-cut.tif</Parameter>
+        </Datasource>
+    </Layer>
+
+
+   
+</Map>

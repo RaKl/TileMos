@@ -1,0 +1,24 @@
+wget http://dds.cr.usgs.gov/srtm/version2_1/SRTM3/Eurasia/N50E014.hgt.zip
+
+gdal_merge.py -init "255" -o saxony.tif N50E011.hgt N50E012.hgt N50E013.hgt N50E014.hgt N50E015.hgt N51E011.hgt N51E012.hgt N51E013.hgt N51E014.hgt N51E015.hgt
+
+gdaldem hillshade -s 27780 -Z 2 saxony.tif saxony_shade.tif
+
+gdaldem color-relief  saxony.tif color2.txt saxony_color_relief.tif
+
+gdalwarp -s_srs EPSG:4326 -t_srs EPSG:900913 all_shades.tif all_shades_goog.tif
+
+gdalwarp -s_srs EPSG:4326 -t_srs EPSG:900913 saxony_shade.tif saxony_shade_goog.tif
+gdalwarp -s_srs EPSG:4326 -t_srs EPSG:900913 saxony_color_relief.tif saxony_color_relief_goog.tif
+
+gdalwarp -co COMPRESS=DEFLATE -dstalpha -cutline grenze-polygon.shp saxony_shade_goog.tif saxony_shade_goog-cut.tif 
+gdalwarp -co COMPRESS=DEFLATE -dstalpha -cutline grenze-polygon.shp saxony_color_relief_goog.tif saxony_color_relief_goog-cut.tif 
+
+ogrinfo -al grenze.shp
+--> Layer name: grenze
+Geometry: Line String
+Feature Count: 385
+Extent: (1321613.269848, 6475998.706584) - (1674460.199655, 6743324.671977)
+
+gdal_translate -projwin 1321613.269848 6743324.671977 1674460.199655 6475998.706584 saxony_shade_goog-cut.tif saxony_shade_goog-cut-box.tif
+
