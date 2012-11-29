@@ -19,12 +19,13 @@ class TileMos:
 	def closeWriting(self):
 		self.out.close()
 
-	def renderImage(self, map_output, mapfile, imgx, imgy):
+	def renderImage(self, map_output, mapfile, imgx, imgy, bbox):
 		print "renderImage"
 		m = mapnik.Map(imgx, imgy)
 		mapnik.load_map(m, mapfile)
 		#ll = (1321613.269848, 6475998.706584, 1674460.199655, 6743324.6719772)
 		ll = (1321613.269848, 6475998.706584, 1674460.199655, 6743324.671977)
+		ll = bbox
 		bbox = mapnik.Box2d(mapnik.Coord(ll[0], ll[3]), mapnik.Coord(ll[2], ll[1]))
 		m.zoom_to_box(bbox)
 		mapnik.render_to_file(m, map_output)
